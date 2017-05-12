@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+sims <- readRDS("~/Google Drive/Academics/PhD/bioe_295/r4ds/tidy_sims.rds")
+sims
+```
+
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho))
+```
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho)) +
+  geom_point()
+```
+
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho, color = repunit)) +
+  geom_point()
+```
+
+Adding a smooth line, i wanted a dashed one, which is type 2 or say "dashed" (see below):
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho, color = repunit)) +
+  geom_point() +
+  geom_abline(linetype = 2) 
+```
+
+Format for calling facets would look like this:
+```{r}
+facet_grid(RowVariable ~ ColumnVariable)
+facet_wrap (~Variable)
+```
+
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho, color = repunit)) +
+  geom_point() +
+  geom_abline(linetype = "dashed") + 
+  facet_grid(repunit ~ estimation_method)
+```
+
+```{r}
+ggplot(sims, aes(x = true_rho, y = estimated_rho, color = repunit)) +
+  geom_point() +
+  geom_abline(linetype = "dashed") + 
+  facet_grid(repunit ~ estimation_method) +
+  scale_color_brewer()
+```
+
+
+
+
+
+
+
+
+
+
+
